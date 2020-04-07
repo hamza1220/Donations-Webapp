@@ -1,7 +1,6 @@
 .container{
 	position: relative;
 	min-height: 100vh;
-	overflow: hidden;
 }
 
 .btn-container{
@@ -10,8 +9,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
 	height: 200px;
-	width: 800px;
-	
+	width: 90%;
+	max-width: 800px;
 	font-size: 2em;
 	font-weight: 800;
 }
@@ -46,4 +45,30 @@
 .donor:hover, .claimant:hover, .search:hover{
 	background-color: black;
 	color: #3536ff;
+}
+
+@media screen and (max-width: 700px){
+	.w-31{
+		width: 100%;
+	}
+
+	.btn-container{
+		width: 200px;
+		font-size: 1em;
+		text-align: center;
+		transform: translate(-50%, -130%);
+	}
+
+	.donor, .claimant, .search{
+		width: 200px;
+		height: 200px;
+		border-radius: 50% !important;
+		border: none;
+		background-color: red;
+		margin-bottom: 10px;
+		background-color: black;
+		color: #3536ff;
+	}
+
+
 }

@@ -15,13 +15,13 @@ class Home extends Component {
         </Link>
 
         <div className="btn-container">
-          <Link to='/donate' className="donor left w-33">
+          <Link to='/donate' className="donor left w-31">
             Make a Donation
           </Link>
-          <Link to='/claim' className="claimant left w-33">
+          <Link to='/claim' className="claimant left w-31">
             Claim Ration
           </Link>
-          <Link to='/search' className="search left w-33">
+          <Link to='/search' className="search left w-31">
             Find Claimants
           </Link>  
         </div>
