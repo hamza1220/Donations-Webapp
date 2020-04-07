@@ -1,0 +1,49 @@
+.container{
+	position: relative;
+	min-height: 100vh;
+	overflow: hidden;
+}
+
+.btn-container{
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+	height: 200px;
+	width: 800px;
+	
+	font-size: 2em;
+	font-weight: 800;
+}
+
+.donor, .claimant, .search{
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-direction: column;
+	height: 100%;
+	border-top: 10px solid black;
+	border-bottom: 10px solid black;	
+	transition: 0.3s;
+	text-decoration: none;
+	color: #333;
+}
+
+.donor, .claimant{
+	border-right: 10px solid black;
+}
+
+.donor{
+	border-left: 10px solid black;
+	border-radius: 50% 0 0 50%;	
+}
+
+.search{
+	border-right: 10px solid black;
+	border-radius: 0 50% 50% 0	
+}
+
+.donor:hover, .claimant:hover, .search:hover{
+	background-color: black;
+	color: #3536ff;
+}

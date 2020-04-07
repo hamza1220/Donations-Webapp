@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
+import Sample from './pages/Sample';
+import DonorForm from './pages/DonorForm'
+import ClaimantForm from './pages/ClaimantForm'
+import Search from './pages/Search'
+
 
 class App extends Component {
   render() {
@@ -9,6 +14,10 @@ class App extends Component {
       <div>
         <Switch>
           <Route exact path='/' component={Home}/>
+          <Route path='/sample' component={Sample}/>
+          <Route path='/donate' component={DonorForm}/>
+          <Route path='/claim'  component={ClaimantForm}/>
+          <Route path='/search' component={Search}/>
         </Switch>
       </div>
     )

@@ -98,6 +98,10 @@ input:focus{
   margin-right: 20px;
 }
 
+.w-33{
+  width: 30%;
+}
+
 h2{
   background-color: #000;
   width: 70%;
