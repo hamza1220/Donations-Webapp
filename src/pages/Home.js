@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     return (
     <div className="App">
-      	<h1>Form Styling Sample</h1>
+      	<h2>Form Styling Sample</h2>
       	<p> All classes have been defined in App.css </p>
       	<div className = "form">
       		<span className="label">Label</span>
