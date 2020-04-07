@@ -9,17 +9,17 @@ class Sample extends Component {
       	<p> All classes have been defined in App.css </p>
       	<div className = "form">
       		<span className="label">Label</span>
-	    	<input placeholder="Type here"/>
+	    	  <input placeholder="Type here"/>
 	    	
-	    	<div className="spacer-20"/>
+	    	  <div className="spacer-20"/>
 
       		<span className="label">Label</span>
-	    	<input placeholder="Type here"/>
+	    	  <input placeholder="Type here"/>
 	    	
-	    	<div className="spacer-20"/>
+	    	  <div className="spacer-20"/>
 
       		<span className="label">Label</span>
-	    	<input placeholder="Type here"/>
+	    	  <input placeholder="Type here"/>
       	</div>	
     </div>
     );
