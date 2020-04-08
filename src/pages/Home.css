@@ -15,6 +15,14 @@
 	font-weight: 800;
 }
 
+.Active{
+	display: block;
+}
+
+.InActive{
+	display: none;
+}
+
 .donor, .claimant, .search{
 	display: flex;
 	justify-content: center;
