@@ -107,6 +107,10 @@ select{
   width: 31%;
 }
 
+.w-66{
+  width: 66%;
+}
+
 .hide{
   display: none;
 }
@@ -119,6 +123,10 @@ select{
   width: 100vw;
   height: 100vh;
 
+}
+
+.phone-spacer{
+  margin-bottom: 15px;
 }
 
 h2{
@@ -137,6 +145,12 @@ h2{
 @media screen and (max-width: 700px){
   h2{
     font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 700px){
+  .phone-spacer{
+    margin-bottom: 0px;
   }
 }
 
