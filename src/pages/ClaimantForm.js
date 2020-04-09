@@ -94,7 +94,7 @@ class ClaimantForm extends Component {
 			
 			axios({
                     method: 'post',
-                    url: 'http://203.101.178.74:7620/public-api/ration_claimant.php',
+                    url: 'http://203.101.178.74:7620/public-api/claimant.php',
                     data: formData,
                     headers: {'Content-Type': 'multipart/form-data'}
             })

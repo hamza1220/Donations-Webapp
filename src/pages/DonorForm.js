@@ -2,10 +2,28 @@ import React, { Component } from 'react';
 import { faCoffee, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { makeStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Tabs } from '@material-ui/core';  
-
 import '../App.css'
 import axios from 'axios'
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
+
+  // const classes = useStyles();
+
 
 class DonorForm extends Component {
   constructor(props){
@@ -15,16 +33,19 @@ class DonorForm extends Component {
       cnic: "",
       cellnum: "",
       email: "",
-      reference: "",
-      individual: true,
+      reference: "1",
+      individual: 1,
       payment_img : "",
       mode_payment : true,
       donation_amount : 0,
       error:"",
+      packages : [],
+      packg : false,
+      list_val : [],
     }
 
+    this.fetchData()
   }
-
 
   
   selectCnic = e =>{
@@ -64,10 +85,12 @@ class DonorForm extends Component {
       this.setState({mode_payment : true})
     }
     if (e.target.value === "Individual"){
-      this.setState({individual: true})
+      this.setState({individual: 1})
     }else if (e.target.value === "Company"){
-      this.setState({individual: false})
+      this.setState({individual: 0})
     }
+  
+
   }
 
   imageHandler = e =>{
@@ -81,6 +104,7 @@ class DonorForm extends Component {
         this.setState({error:'Image should be a png or jpg/jpeg file'})
       }  
     }
+
 }
 
 formSubmit = e =>{
@@ -150,7 +174,10 @@ formSubmit = e =>{
         data: formData,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
-    .then(res=>{console.log(JSON.stringify(res))})
+    .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
+      alert("Thank you for submitting the form")
+      window.location.reload();
+    }})
     .catch(err=>{console.log(err)})
   
     // }
@@ -160,11 +187,38 @@ formSubmit = e =>{
 
 }
 
+fetchData = () => {
+  axios({
+    method: 'get',
+    url: 'http://203.101.178.74:7620/public-api/package.php',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+  })
+  .then(res=>{
+    var vals = []
+    res.data.map(val=>vals.push(0))
+    // console.log(vals)
+    this.setState({packages: res.data, list_val: vals})
+  })
+}
 
+checkbox = () =>{
+  this.setState({packg : !this.state.packg})
+}
+
+changeval = (val) => {
+  this.state.list_val[val.target.id] = val.target.value*this.state.packages[val.target.id].cost
+  var lis = this.state.list_val
+  var sum =0
+  for (var i=0; i< lis.length; i++){
+    sum += lis[i]
+  }
+  this.setState({donation_amount: sum})
+}
 
 
 
   render() {
+    let items = this.state.packages
     return (
     <div className="App">
       	
@@ -235,7 +289,46 @@ formSubmit = e =>{
               </div>
 
         	</div>
+          <div style={{textAlign:"left", display:"block-inline"}}>
+          <p>
+          <input style={{width:"10%"}}type="checkbox" onChange={this.checkbox}/> Please select if you want to donate according to the packages
+          </p>
+          </div>
+          <div style={{display: this.state.packg ?"block" :"none"}}>
+          {
+            items.map((val,i) => 
+              <ExpansionPanel
+              key = {i}
+              >
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                // id= {"panel1a-header"+val}
+              >
+                <Typography >{val.name}</Typography>
+              </ExpansionPanelSummary>
+              {/* <ExpansionPanelDetails> */}
+                {/* <Typography> */}
+                <p >Total price of the package: {val.cost}</p>
+                <ul>
+                {val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.name} {item.quantity} {item.unit_name}</li></div>)}
+                </ul>
+                <div>
+                  Select the number of packages you want to donate? <input min="0" id={i} type="number" style={{width:"5%", height:"3%"}} onChange={this.changeval}/>
+                </div>
+                
+                {/* </Typography> */}
+              {/* </ExpansionPanelDetails> */}
+            </ExpansionPanel>
+            )
+          }
+          </div>
+          <br/>
+          <br/>
+          <br/>
 
+
+          {/* <ExpansionPanel TransitionProps={{ unmountOnExit: true }} /> */}
           {/* <div className="line">
               Package information is provided below, for you convenience. Clicking on a package will add the equivalent amount to Donate amount/ 
               <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
@@ -257,7 +350,11 @@ formSubmit = e =>{
         	<div className="line">
 				<div className="left double-input">
 	    	  		<span className="label">Donation Amount</span><br/>
-	    	  		<input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} onChange={e=>{this.selectDonateAmount(e)}}/>
+              {
+                this.state.packg ? <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} disabled onChange={e=>{this.selectDonateAmount(e)}}/> :
+                <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount}  onChange={e=>{this.selectDonateAmount(e)}}/>
+              }
+	    	  		{/* <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} {... this.state.packg ? "disabled": ""} onChange={e=>{this.selectDonateAmount(e)}}/> */}
 				</div>
 
         <div className="right double-input">
