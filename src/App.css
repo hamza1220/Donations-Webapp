@@ -99,6 +99,10 @@ select{
   margin-bottom: 20px;
 }
 
+.spacer-60{
+  margin-bottom: 60px;
+}
+
 .label{
   display: inline-block;
   margin-bottom: 5px;

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(16),
     fontWeight: theme.typography.fontWeightRegular,
   },
 }));
@@ -254,72 +254,45 @@ changeval = (val) => {
         	</div>
 
         	<div className="line">
-				<div className="left double-input">
-	    	  		<span className="label">How did you hear about us?</span><br/>
-	    	  		<select required id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
-					  {/* <option className="hide" value="" disabled></option> */}
-					  <option value="1">Option 1</option>
-					  <option value="2">Option 2</option>
-					  <option value="3">Option 3</option>
-					  <option value="4">Option 4</option>
-					  <option value="5">Option 5</option>
-					</select>
-				</div>
+    				<div className="left double-input">
+    	    	  		<span className="label">How did you hear about us?</span><br/>
+    	    	  		<select required id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
+    					  {/* <option className="hide" value="" disabled></option> */}
+    					  <option value="1">Option 1</option>
+    					  <option value="2">Option 2</option>
+    					  <option value="3">Option 3</option>
+    					  <option value="4">Option 4</option>
+    					  <option value="5">Option 5</option>
+    					</select>
+    				</div>
 
-        <div className="right double-input">
-	    	  		<span className="label">Mode of payment</span><br/>
-	    	  		<select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
-					  <option className="hide" value="" disabled defaultValue>Select Area</option>
-					  <option value="C">Cash</option>
-					  <option value="O">Online Transfer</option>
-					</select>
-				</div>	
-          
-          
+            <div className="right double-input">
+              <span className="label">Email address</span><br/>
+              <input required type="Email" placeholder="Enter Email Address" value={this.state.email} onChange={e=>{this.selectEmail(e)}}/>
+            </div>
           </div>
 
-        	<div className="line">
-              <div className = {this.state.mode_payment ? "InActive": "Active"}>
-                Please transfer your amount in this Bank account and attach the proof of payment below          
-              </div>
-              <div className = {this.state.mode_payment ? "Active": "InActive"}>
-                Address : Lahore University of Management Sciences, DHA, Lahore
-                <br/>
-                Contact Information: 0300-0000000          
-              </div>
-
-        	</div>
-          <div style={{textAlign:"left", display:"block-inline"}}>
-          <p>
-          <input style={{width:"10%"}}type="checkbox" onChange={this.checkbox}/> Please select if you want to donate according to the packages
-          </p>
+          <div style={{textAlign:"center", display:"block-inline", marginBottom: '10px'}}>
+              <input className="checkbox" type="checkbox" onChange={this.checkbox}/> <b style={{fontSize: '18px'}}>Please select if you want to donate according to pre-assembled packages</b>
           </div>
           <div style={{display: this.state.packg ?"block" :"none"}}>
           {
             items.map((val,i) => 
-              <ExpansionPanel
-              key = {i}
-              >
-              <ExpansionPanelSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                // id= {"panel1a-header"+val}
-              >
-                <Typography >{val.name}</Typography>
-              </ExpansionPanelSummary>
-              {/* <ExpansionPanelDetails> */}
-                {/* <Typography> */}
-                <p >Total price of the package: {val.cost}</p>
+              <ExpansionPanel key = {i} >
+                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content">
+                  <Typography ><b className="packageName">{val.name}</b></Typography>
+                </ExpansionPanelSummary>
+                             
+                <div className="single-input contents"> <p >Total Price: &emsp; Rs.{val.cost}</p> </div>
+                <div className="single-input contents"> Package Contents: </div>
                 <ul>
-                {val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.name} {item.quantity} {item.unit_name}</li></div>)}
+                  {val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.quantity} {item.unit_name} {item.name}</li></div>)}
                 </ul>
-                <div>
-                  Select the number of packages you want to donate? <input min="0" id={i} type="number" style={{width:"5%", height:"3%"}} onChange={this.changeval}/>
+                <div className="spacer-20"/>
+                <div className="single-input contents">
+                  Enter Number of Packages to Donate? <input min="0" id={i} type="number" className="package-counter" onChange={this.changeval}/>
                 </div>
-                
-                {/* </Typography> */}
-              {/* </ExpansionPanelDetails> */}
-            </ExpansionPanel>
+              </ExpansionPanel>
             )
           }
           </div>
@@ -327,49 +300,49 @@ changeval = (val) => {
           <br/>
           <br/>
 
-
-          {/* <ExpansionPanel TransitionProps={{ unmountOnExit: true }} /> */}
-          {/* <div className="line">
-              Package information is provided below, for you convenience. Clicking on a package will add the equivalent amount to Donate amount/ 
-              <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
-              </Tabs>
-              <TabPanel value={value} index={0}>
-                Item One
-              </TabPanel>
-              <TabPanel value={value} index={1}>
-                Item Two
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                Item Three
-              </TabPanel>
-        	</div> */}
-
         	<div className="line">
-				<div className="left double-input">
+    				<div className="left double-input">
 	    	  		<span className="label">Donation Amount</span><br/>
               {
                 this.state.packg ? <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} disabled onChange={e=>{this.selectDonateAmount(e)}}/> :
                 <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount}  onChange={e=>{this.selectDonateAmount(e)}}/>
               }
-	    	  		{/* <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} {... this.state.packg ? "disabled": ""} onChange={e=>{this.selectDonateAmount(e)}}/> */}
-				</div>
+    				</div>
 
-        <div className="right double-input">
-	    	  		<span className="label">Email address</span><br/>
-	    	  		<input required type="Email" placeholder="Enter Email Address" value={this.state.email} onChange={e=>{this.selectEmail(e)}}/>
-				</div>
+            <div className="right double-input">
+              <span className="label">Mode of payment</span><br/>
+              <select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
+              <option className="hide" value="" disabled defaultValue>Select Area</option>
+              <option value="C">Cash</option>
+              <option value="O">Online Transfer</option>
+              </select>
+            </div>  
         	</div>
 
-          <div className = {this.state.mode_payment ? "InActive": "double-input"}>
-	    	  		<span className="label">Upload proof of payment</span><br/>
-	    	  		<label className="img-container">
-              <p>{this.state.payment_img? this.state.payment_img.name: "Upload proof of payment"}</p>
-		    	  		<input className="img-input" required type="file" onChange={e =>{this.imageHandler(e)}}/>
-					</label>
-				</div>
+          <div className="line">
+              <div className = {this.state.mode_payment ? "InActive": "Active"}>
+                Please transfer your amount in this Bank account and attach the proof of payment below <br/>         
+                <div style={{textAlign: 'center'}}>
+                  Account Title: xxxxxx xxxxx xxxx <br/>
+                  Bank Code: xxxx xxxx xx<br/>
+                  IBAN: xxxxxxxx-xxxxxx-xxxx-xx<br/>
+                </div>
+              </div>
+              <div className = {this.state.mode_payment ? "Active": "InActive"}>
+                Address : Lahore University of Management Sciences, DHA, Lahore
+                <br/>
+                Contact Information: 0300-0000000          
+              </div>
+          </div>          
+
+          <div className = {this.state.mode_payment ? "InActive": "single-input"}>
+    	  		<span className="label">Upload proof of payment</span><br/>
+    	  		<label className="img-container">
+              <p>{this.state.payment_img? this.state.payment_img.name: "Upload Proof of Payment"}</p>
+	    	  		<input className="img-input" required type="file" onChange={e =>{this.imageHandler(e)}}/>
+				    </label>
+            <div className="spacer-60"/>
+				  </div>
 
 
         	<div>
