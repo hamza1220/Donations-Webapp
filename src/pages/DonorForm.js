@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { faCoffee, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
-// import { faHome } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from '@material-ui/core/styles';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -9,8 +8,10 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Tabs } from '@material-ui/core';  
-import '../App.css'
 import axios from 'axios'
+
+import '../App.css'
+import '../styles/Forms.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +43,8 @@ class DonorForm extends Component {
       packages : [],
       packg : false,
       list_val : [],
+
+      thankyou: false,
     }
 
     this.fetchData()
@@ -175,13 +178,10 @@ formSubmit = e =>{
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
     .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
-      alert("Thank you for submitting the form")
-      window.location.reload();
+      this.setState({thankyou: true})
+     
     }})
     .catch(err=>{console.log(err)})
-  
-    // }
-  
   }
 
 
@@ -218,53 +218,55 @@ changeval = (val) => {
 
 
   render() {
+
     let items = this.state.packages
-    return (
+    
+    const form = 
     <div className="App">
-      	
+        
         <h2> Donor Form </h2>
         <br/>
         <div className = "form" ref="form">
-        	<div className="line">
-				<div className="left double-input">
-	    	  		<span className="label">CNIC</span><br/>
-	    	  		<input required type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
-				</div>
+          <div className="line">
+        <div className="left double-input">
+              <span className="label">CNIC</span><br/>
+              <input required type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
+        </div>
 
-				<div className="right double-input">
-	    	  		<span className="label">Name</span><br/>
-	    	  		<input required type="string" placeholder="Enter Name" value={this.state.name} onChange={e=>{this.selectName(e)}}/>
-				</div>
-        	</div>
+        <div className="right double-input">
+              <span className="label">Name</span><br/>
+              <input required type="string" placeholder="Enter Name" value={this.state.name} onChange={e=>{this.selectName(e)}}/>
+        </div>
+          </div>
 
-        	<div className="line">
-				<div className="left double-input">
-	    	  		<span className="label">What Defines you best?</span><br/>
-	    	  		<select required id="individual" value={this.state.individual} onChange={e=>{this.selectOption(e)}}>
-					  <option className="hide" value="" disabled>What Defines you best?</option>
-					  <option value="Individual">Individual</option>
-					  <option value="Company">Company</option>
-					</select>
-				</div>
+          <div className="line">
+        <div className="left double-input">
+              <span className="label">What Defines you best?</span><br/>
+              <select required id="individual" value={this.state.individual} onChange={e=>{this.selectOption(e)}}>
+            <option className="hide" value="" disabled>What Defines you best?</option>
+            <option value="Individual">Individual</option>
+            <option value="Company">Company</option>
+          </select>
+        </div>
 
-				<div className="right double-input">
-	    	  		<span className="label">Cell Number</span><br/>
-	    	  		<input required type="string" placeholder="Enter Cell Number" value={this.state.cellnum} onChange={e=>{this.selectCellNumber(e)}}/>
-				</div>
-        	</div>
+        <div className="right double-input">
+              <span className="label">Cell Number</span><br/>
+              <input required type="string" placeholder="Enter Cell Number" value={this.state.cellnum} onChange={e=>{this.selectCellNumber(e)}}/>
+        </div>
+          </div>
 
-        	<div className="line">
-    				<div className="left double-input">
-    	    	  		<span className="label">How did you hear about us?</span><br/>
-    	    	  		<select required id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
-    					  {/* <option className="hide" value="" disabled></option> */}
-    					  <option value="1">Option 1</option>
-    					  <option value="2">Option 2</option>
-    					  <option value="3">Option 3</option>
-    					  <option value="4">Option 4</option>
-    					  <option value="5">Option 5</option>
-    					</select>
-    				</div>
+          <div className="line">
+            <div className="left double-input">
+                  <span className="label">How did you hear about us?</span><br/>
+                  <select required id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
+                {/* <option className="hide" value="" disabled></option> */}
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+                <option value="5">Option 5</option>
+              </select>
+            </div>
 
             <div className="right double-input">
               <span className="label">Email address</span><br/>
@@ -300,14 +302,14 @@ changeval = (val) => {
           <br/>
           <br/>
 
-        	<div className="line">
-    				<div className="left double-input">
-	    	  		<span className="label">Donation Amount</span><br/>
+          <div className="line">
+            <div className="left double-input">
+              <span className="label">Donation Amount</span><br/>
               {
                 this.state.packg ? <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} disabled onChange={e=>{this.selectDonateAmount(e)}}/> :
                 <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount}  onChange={e=>{this.selectDonateAmount(e)}}/>
               }
-    				</div>
+            </div>
 
             <div className="right double-input">
               <span className="label">Mode of payment</span><br/>
@@ -317,7 +319,7 @@ changeval = (val) => {
               <option value="O">Online Transfer</option>
               </select>
             </div>  
-        	</div>
+          </div>
 
           <div className="line">
               <div className = {this.state.mode_payment ? "InActive": "Active"}>
@@ -336,27 +338,35 @@ changeval = (val) => {
           </div>          
 
           <div className = {this.state.mode_payment ? "InActive": "single-input"}>
-    	  		<span className="label">Upload proof of payment</span><br/>
-    	  		<label className="img-container">
+            <span className="label">Upload proof of payment</span><br/>
+            <label className="img-container">
               <p>{this.state.payment_img? this.state.payment_img.name: "Upload Proof of Payment"}</p>
-	    	  		<input className="img-input" required type="file" onChange={e =>{this.imageHandler(e)}}/>
-				    </label>
+              <input className="img-input" required type="file" onChange={e =>{this.imageHandler(e)}}/>
+            </label>
             <div className="spacer-60"/>
-				  </div>
+          </div>
 
 
-        	<div>
-        		<button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Donate</button>
-        	</div>
-      	</div>	
+          <div>
+            <button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Donate</button>
+          </div>
+        </div>  
 
-      	<br/>
-      	<div className={this.state.error? "isa_error":null}>
+        <br/>
+        <div className={this.state.error? "isa_error":null}>
          {this.state.error? <div><FontAwesomeIcon className="icon" icon={faTimesCircle} /><b>{this.state.error}</b></div>:null}
         </div>
-
-
     </div>
+
+    const thanks = <div className="App relative full-page"> 
+      <div className="thanks-body">
+        <p className="thanks-text"> Thank you for your donation! </p>
+      </div>
+    </div>
+
+
+    return (
+        <div> {this.state.thankyou? thanks:form}</div>
     );
   }
 }

@@ -4,7 +4,9 @@ import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import '../App.css'
-import './Forms.css'
+import '../styles/Forms.css'
+
+import data from '../data/pk.json'
 
 
 class ClaimantForm extends Component {
@@ -111,6 +113,9 @@ class ClaimantForm extends Component {
 	}
 
   render() {
+  	const city_options = data.map((val,i) => <option value={ val.city } key={i}> { val.city } </option> ) 
+
+
     const form= <div className="App">
         <h2> Claimant Form </h2>
         <br/>
@@ -147,14 +152,7 @@ class ClaimantForm extends Component {
 	        	<div className="line">
 					<div className="left double-input">
 		    	  		<span className="label">Occupation</span><br/>
-		    	  		<select required id="occupation" value={this.state.occupation} onChange={e=>{this.selectOption(e)}}>
-						  <option className="hide" value="" disabled>Select Occupation</option>
-						  <option value="1">Option 1</option>
-						  <option value="2">Option 2</option>
-						  <option value="3">Option 3</option>
-						  <option value="4">Option 4</option>
-						  <option value="5">Option 5</option>
-						</select>
+		    	  		<input name="occupation" id="occupation" required type="string" placeholder="Enter Occupation" maxlength="20" value={this.state.occupation} onChange={e=>{this.selectOption(e)}}/>
 					</div>
 
 					<div className="right double-input">
@@ -168,11 +166,7 @@ class ClaimantForm extends Component {
 		    	  		<span className="label">Area</span><br/>
 		    	  		<select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
 						  <option className="hide" value="" disabled defaultValue>Select Area</option>
-						  <option value="1">Option 1</option>
-						  <option value="2">Option 2</option>
-						  <option value="3">Option 3</option>
-						  <option value="4">Option 4</option>
-						  <option value="5">Option 5</option>
+						  {city_options}
 						</select>
 					</div>
 
@@ -217,6 +211,7 @@ class ClaimantForm extends Component {
     	</div>
     </div>
 
+    
 
     return (
     	<div> {this.state.thankyou? thanks:form}</div>

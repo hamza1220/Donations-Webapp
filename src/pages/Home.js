@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 import '../App.css'
-import './Home.css'
+import '../styles/Home.css'
 
 class Home extends Component {
   render() {
     return (
-    <div className="App container">
-      	
-        <Link to='/sample'>
-          <br/><br/><br/><br/>
-          View Sample Components
-        </Link>
-
+      <div className="App container">  
         <div className="btn-container">
           <Link to='/donate' className="donor left w-31">
             Make a Donation
@@ -25,8 +19,7 @@ class Home extends Component {
             Find Claimants
           </Link>  
         </div>
-
-    </div>
+      </div>
     );
   }
 }

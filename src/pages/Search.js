@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 import '../App.css'
-import './Forms.css'
+import '../styles/Forms.css'
 
 
 
@@ -31,7 +31,7 @@ class Search extends Component {
   	else{
   		
   		this.setState({error: ''})
-        axios.get('http://203.101.178.74:7620/public-api/ration_claimant.php', {
+        axios.get('http://203.101.178.74:7620/public-api/claimant.php', {
 		    params: {
 		      cnic: this.state.cnic
 		    }
