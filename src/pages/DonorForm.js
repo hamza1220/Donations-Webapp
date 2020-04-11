@@ -331,9 +331,9 @@ changeval = (val) => {
                 </div>
               </div>
               <div className = {this.state.mode_payment ? "Active": "InActive"}>
-                Address : Lahore University of Management Sciences, DHA, Lahore
+                Address: Block 1, Plot C1, Gulberg 3, Lahore
                 <br/>
-                Contact Information: 0300-0000000          
+                Contact Information: +92-3xx-xxxxxxx          
               </div>
           </div>          
 
