@@ -114,14 +114,8 @@ formSubmit = e =>{
   e.preventDefault();
   console.log(this.state)
   if (this.state.cnic===''){this.setState({error: 'Enter a Valid CNIC Number'})}
-  else if (this.state.name===''){this.setState({error: 'Enter your Name'})}
-  else if (this.state.individual===''){this.setState({error: 'Please fill "What describes you best"'})}
   else if (this.state.cellnum===''){this.setState({error: 'Enter a Valid Cell Number'})}
-  else if (this.state.reference===''){this.setState({error: 'How did you hear about us, not filled'})}
-  // else if (this.state.fam_size===''){this.setState({error: 'Enter a Valid Family Size'})}
   else if (this.state.donation_amount===0){this.setState({error: 'Enter a Valid Donation amount'})}
-  else if (this.state.email===""){this.setState({error: 'Enter Email Address'})}
-  // else if (this.state.area===''){this.setState({error: 'Select your Area'})}
   else if (this.state.mode_payment === false){
     if (this.state.payment_img===''){this.setState({error: 'Upload proof of payment'})}	
     else {
@@ -136,10 +130,7 @@ formSubmit = e =>{
       formData.append('reference', this.state.reference)
       formData.append('amount', this.state.donation_amount)
       formData.append('email', this.state.email)
-      // formData.append('mode_payment', this.state.mode_payment)
       formData.append('image', this.state.payment_img)
-      // formData.append('bill', this.state.bill_amount)
-      // formData.append('image', this.state.bill_img)
     
       axios({
           method: 'post',
@@ -156,7 +147,6 @@ formSubmit = e =>{
     this.setState({error: '', thankyou: true})
     console.log("error", this.state.error)
 
-    // if (this.state.error.length === 0){
     console.log("submitting")
     let formData = new FormData();
     formData.append('cnic', this.state.cnic)
@@ -166,22 +156,19 @@ formSubmit = e =>{
     formData.append('reference', this.state.reference)
     formData.append('amount', this.state.donation_amount)
     formData.append('email', this.state.email)
-    // formData.append('mode_payment', this.state.mode_payment)
     formData.append('image', this.state.payment_img)
-    // formData.append('bill', this.state.bill_amount)
-    // formData.append('image', this.state.bill_img)
   
-    axios({
-        method: 'post',
-        url: 'http://203.101.178.74:7620/public-api/donation.php',
-        data: formData,
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    })
-    .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
+    // axios({
+    //     method: 'post',
+    //     url: 'http://203.101.178.74:7620/public-api/donation.php',
+    //     data: formData,
+    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    // })
+    // .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
       this.setState({thankyou: true})
      
-    }})
-    .catch(err=>{console.log(err)})
+    // }})
+    // .catch(err=>{console.log(err)})
   }
 
 
@@ -196,7 +183,6 @@ fetchData = () => {
   .then(res=>{
     var vals = []
     res.data.map(val=>vals.push(0))
-    // console.log(vals)
     this.setState({packages: res.data, list_val: vals})
   })
 }
@@ -228,37 +214,37 @@ changeval = (val) => {
         <br/>
         <div className = "form" ref="form">
           <div className="line">
-        <div className="left double-input">
-              <span className="label">CNIC</span><br/>
-              <input required type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
-        </div>
+            <div className="left double-input">
+                  <span className="label">CNIC &emsp;*required</span><br/>
+                  <input required type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
+            </div>
 
-        <div className="right double-input">
-              <span className="label">Name</span><br/>
-              <input required type="string" placeholder="Enter Name" value={this.state.name} onChange={e=>{this.selectName(e)}}/>
-        </div>
+            <div className="right double-input">
+                  <span className="label">Cell Number  &emsp;*required</span><br/>
+                  <input required type="string" placeholder="Enter Cell Number" value={this.state.cellnum} onChange={e=>{this.selectCellNumber(e)}}/>
+            </div>
           </div>
 
           <div className="line">
-        <div className="left double-input">
-              <span className="label">What Defines you best?</span><br/>
-              <select required id="individual" value={this.state.individual} onChange={e=>{this.selectOption(e)}}>
-            <option className="hide" value="" disabled>What Defines you best?</option>
-            <option value="Individual">Individual</option>
-            <option value="Company">Company</option>
-          </select>
-        </div>
+            <div className="left double-input">
+                  <span className="label">Name</span><br/>
+                  <input type="string" placeholder="Enter Name" value={this.state.name} onChange={e=>{this.selectName(e)}}/>
+            </div>
+            <div className="right double-input">
+                  <span className="label">What Defines you best?</span><br/>
+                  <select id="individual" value={this.state.individual} onChange={e=>{this.selectOption(e)}}>
+                <option className="hide" value="" disabled>What Defines you best?</option>
+                <option value="Individual">Individual</option>
+                <option value="Company">Company</option>
+              </select>
+            </div>
 
-        <div className="right double-input">
-              <span className="label">Cell Number</span><br/>
-              <input required type="string" placeholder="Enter Cell Number" value={this.state.cellnum} onChange={e=>{this.selectCellNumber(e)}}/>
-        </div>
           </div>
 
           <div className="line">
             <div className="left double-input">
                   <span className="label">How did you hear about us?</span><br/>
-                  <select required id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
+                  <select id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
                 {/* <option className="hide" value="" disabled></option> */}
                 <option value="1">Option 1</option>
                 <option value="2">Option 2</option>
@@ -304,7 +290,7 @@ changeval = (val) => {
 
           <div className="line">
             <div className="left double-input">
-              <span className="label">Donation Amount</span><br/>
+              <span className="label">Donation Amount &emsp;*required</span><br/>
               {
                 this.state.packg ? <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} disabled onChange={e=>{this.selectDonateAmount(e)}}/> :
                 <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount}  onChange={e=>{this.selectDonateAmount(e)}}/>
@@ -312,7 +298,7 @@ changeval = (val) => {
             </div>
 
             <div className="right double-input">
-              <span className="label">Mode of payment</span><br/>
+              <span className="label">Mode of payment &emsp;*required</span><br/>
               <select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
               <option className="hide" value="" disabled defaultValue>Select Area</option>
               <option value="C">Cash</option>
@@ -346,7 +332,7 @@ changeval = (val) => {
             <div className="spacer-60"/>
           </div>
 
-
+          <div className="spacer-60 phone-only"/>
           <div>
             <button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Donate</button>
           </div>

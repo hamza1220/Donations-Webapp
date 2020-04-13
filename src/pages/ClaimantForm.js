@@ -6,32 +6,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../App.css'
 import '../styles/Forms.css'
 
-import data from '../data/pk.json'
-
 
 class ClaimantForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cnic: '',
       name: '',
-      gender: '',
       cellnum: '',
-      occupation: '',
-      fam_size: 1,
-      area: '',
-      address: '',
-      bill_amount: '',
-      bill_img: '',
-
+      email: '',
+      who: '',
+      
       error: '',
       thankyou: false,
     };
 
   }	
 
-  	selectCnic = e =>{
-    	this.setState({cnic: e.target.value})
+  	selectEmail = e =>{
+    	this.setState({email: e.target.value})
     }
 
     selectName = e =>{
@@ -42,61 +34,29 @@ class ClaimantForm extends Component {
     	this.setState({cellnum: e.target.value})
     }
 
-    selectFamSize = e =>{
-    	this.setState({fam_size: e.target.value})
+    selectWho = e =>{
+    	this.setState({who: e.target.value})
     }
-
-    selectAddress = e =>{
-    	this.setState({address: e.target.value})
-    }
-
-    selectBillAmount = e =>{
-    	this.setState({bill_amount: e.target.value})
-    }
-
-    selectOption = e =>{
-    	console.log(e.target.id, e.target.value)
-    	this.setState({[e.target.id]: e.target.value})
-    }
-
-    imageHandler = e =>{
-	    console.log(e.target.files[0])
-	    if(e.target.files && (e.target.files[0].type==="image/jpg" || e.target.files[0].type==="image/png" || e.target.files[0].type==="image/jpeg")){
-	      console.log(e.target.files[0])
-	      this.setState({bill_img: e.target.files[0]})
-	    }
-	    else{
-	    	this.setState({error:'Image should be a png or jpg/jpeg file'})
-	    }
-	}
 
 	formSubmit = e =>{
 		e.preventDefault();
-		if (this.state.cnic===''){this.setState({error: 'Enter a Valid CNIC Number'}); return;}
-		else if (this.state.name===''){this.setState({error: 'Enter your Name'}); return;}
-		else if (this.state.gender===''){this.setState({error: 'Select your Gender'}); return;}
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if (this.state.name===''){this.setState({error: 'Enter your Name'}); return;}
 		else if (this.state.cellnum===''){this.setState({error: 'Enter a Valid Cell Number'}); return;}
-		else if (this.state.occupation===''){this.setState({error: 'Select your Occupation'}); return;}
-		else if (this.state.fam_size===''){this.setState({error: 'Enter a Valid Family Size'}); return;}
-		else if (this.state.bill_amount===''){this.setState({error: 'Enter a Valid Bill Amount Number'}); return;}
-		else if (this.state.area===''){this.setState({error: 'Select your Area'}); return;}
-		else if (this.state.bill_img===''){this.setState({error: 'Upload your Electricity Bill'}); return;}		
+		else if (!this.state.email.match(mailformat)){this.setState({error: 'Enter a Valid Email Address'}); return;}
+		else if (this.state.who===''){this.setState({error: 'Identify who you represent'}); return;}
+
 		else {
 			let formData = new FormData();
-			formData.append('cnic', this.state.cnic)
 			formData.append('name', this.state.name)
 			formData.append('phone', this.state.cellnum)
-			formData.append('gender', this.state.gender)
-			formData.append('occupation', this.state.occupation)
-			formData.append('family_size', this.state.fam_size)
-			formData.append('area', this.state.area)
-			formData.append('address', this.state.address)
-			formData.append('bill', this.state.bill_amount)
-			formData.append('image', this.state.bill_img)
+			formData.append('email', this.state.email)
+			formData.append('affiliation', this.state.who)
 			
 			axios({
                     method: 'post',
-                    url: 'http://203.101.178.74:7620/public-api/claimant.php',
+                    url: 'http://203.101.178.74:7620/public-api/request.php',
+                    // url: 'http://localhost:8000/public-api/request.php',
                     data: formData,
                     headers: {'Content-Type': 'multipart/form-data'}
             })
@@ -113,86 +73,43 @@ class ClaimantForm extends Component {
 	}
 
   render() {
-  	const city_options = data.map((val,i) => <option value={ val.city } key={i}> { val.city } </option> ) 
-
 
     const form= <div className="App">
-        <h2> Claimant Form </h2>
+        <h2> Register Claimants Form </h2>
+        <h3> Fill this form to be able to register claimants that require ration donations</h3>
         <br/>
-        <div className = "form" ref="form">
+        <div className = "form single-form" ref="form">
         	<form id="form">
 	        	<div className="line">
-					<div className="left double-input">
-		    	  		<span className="label">CNIC</span><br/>
-		    	  		<input name="cnic" required type="string" placeholder="Enter CNIC/Phone Number" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
-					</div>
-
-					<div className="right double-input">
+					<div className="single-input">
 		    	  		<span className="label">Name</span><br/>
-		    	  		<input name="name" required type="string" placeholder="Enter Name" value={this.state.name} onChange={e=>{this.selectName(e)}}/>
+		    	  		<input name="name" required type="string" placeholder="Enter Name" value={this.state.name} maxLength="50" onChange={e=>{this.selectName(e)}}/>
 					</div>
 	        	</div>
 
 	        	<div className="line">
-					<div className="left double-input">
-		    	  		<span className="label">Gender</span><br/>
-		    	  		<select required id="gender" value={this.state.gender} onChange={e=>{this.selectOption(e)}}>
-						  <option className="hide" value="" disabled>Select Gender</option>
-						  <option value="M">Male</option>
-						  <option value="F">Female</option>
-						</select>
-					</div>
-
-					<div className="right double-input">
+					<div className="single-input">
 		    	  		<span className="label">Cell Number</span><br/>
 		    	  		<input required type="string" placeholder="Enter Cell Number" value={this.state.cellnum} onChange={e=>{this.selectCellNumber(e)}}/>
 					</div>
 	        	</div>
 
 	        	<div className="line">
-					<div className="left double-input">
-		    	  		<span className="label">Occupation</span><br/>
-		    	  		<input name="occupation" id="occupation" required type="string" placeholder="Enter Occupation" maxlength="20" value={this.state.occupation} onChange={e=>{this.selectOption(e)}}/>
-					</div>
-
-					<div className="right double-input">
-		    	  		<span className="label">Family Size</span><br/>
-		    	  		<input required type="number" min="1" placeholder="Enter Family Size" value={this.state.fam_size} onChange={e=>{this.selectFamSize(e)}}/>
+					<div className="single-input">
+		    	  		<span className="label">Email Address</span><br/>
+		    	  		<input required type="email" placeholder="Enter Email Address" maxLength="35" value={this.state.email} onChange={e=>{this.selectEmail(e)}}/>
 					</div>
 	        	</div>
 
 	        	<div className="line">
-					<div className="left double-input">
-		    	  		<span className="label">Area</span><br/>
-		    	  		<select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
-						  <option className="hide" value="" disabled defaultValue>Select Area</option>
-						  {city_options}
-						</select>
+					<div className="single-input">
+		    	  		<span className="label">Who do you represent? </span><br/>
+		    	  		<input required type="string" placeholder="If not affiliated, write Individual" maxLength="50" value={this.state.who} onChange={e=>{this.selectWho(e)}}/>
 					</div>
-
-					<div className="right double-input">
-		    	  		<span className="label">Address</span><br/>
-		    	  		<input type="string" placeholder="Enter Address (Optional)" value={this.state.address} onChange={e=>{this.selectAddress(e)}}/>
-					</div>
-	        	</div>
-
-	        	<div className="line">
-					<div className="left double-input">
-		    	  		<span className="label">Electricity Bill Amount</span><br/>
-		    	  		<input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.bill_amount} onChange={e=>{this.selectBillAmount(e)}}/>
-					</div>
-
-					<div className="right double-input">
-		    	  		<span className="label">Electricity Bill Image</span><br/>
-		    	  		<label className="img-container">
-						    <p>{this.state.bill_img? this.state.bill_img.name: "Upload Electricity Bill Image"}</p>
-			    	  		<input className="img-input" required type="file" onChange={e =>{this.imageHandler(e)}}/>
-						</label>
-					</div>
-	        	</div>
+	        	</div>	        	
 
 	        	<div>
-	        		<button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Add Claimant</button>
+	        		<button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Request Permission</button>
 	        	</div>
 	    	</form>
 	    </div>	
@@ -205,9 +122,7 @@ class ClaimantForm extends Component {
 
     const thanks = <div className="App relative full-page"> 
     	<div className="thanks-body">
-    		<p className="thanks-text"> Thank you for registering as a Ration Claimant </p>
-    		<button className="form-btn" onClick={e=>{this.setState({thankyou: false, cnic: '', name: '', gender: '', cellnum: '', occupation: '', fam_size: 1, area: '', address: '', bill_amount: '', bill_img: ''})}}>Register another Claimant</button>
-
+    		<p className="thanks-text thanks-text-phone"> Thank you for submitting your request. You will be contacted shortly. </p>
     	</div>
     </div>
 

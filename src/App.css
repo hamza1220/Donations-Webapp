@@ -52,7 +52,7 @@ body{
   background: #333;
 }
 
-input, select{
+input, select, textarea{
   padding-top: 20px !important;
   padding-bottom: 20px !important;
   padding-left: 27px !important;
@@ -61,8 +61,7 @@ input, select{
   font-size: 16px;
 }
 
-
-input:focus, select:focus{
+input:focus, select:focus, textarea:focus{
   /*outline-color: #333;*/
   outline-color: #3536ff;
 }
@@ -71,6 +70,9 @@ select{
   width: 100%;
 }
 
+textarea{
+  font-family: Arial;
+}
 
 .left{
   float: left;
@@ -156,6 +158,10 @@ h2{
 @media screen and (min-width: 700px){
   .phone-spacer{
     margin-bottom: 0px;
+  }
+
+  .phone-only{
+    display: none;
   }
 }
 

@@ -60,8 +60,8 @@ class Search extends Component {
         <h2> Search Page </h2>
         <div className="form spacer-20">
 	        <div className="left double-input spacer-20" style={{width: '100%'}}>
-		        <span className="label">CNIC</span><br/>
-        		<input type="string" value={this.state.cnic} placeholder="Enter Claimant's CNIC" onChange = {e=>{this.changeCNIC(e)}}/>
+		        <span className="label">CNIC / Phone Number</span><br/>
+        		<input type="string" value={this.state.cnic} placeholder="Enter Claimant's CNIC or Phone Number" onChange = {e=>{this.changeCNIC(e)}}/>
         	</div>
         	<div>
         		<button type="submit" form="form" className="form-btn" onClick={e=>{this.search(e)}}>Search</button>

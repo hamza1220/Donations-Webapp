@@ -13,10 +13,10 @@ class Home extends Component {
             Make a Donation
           </Link>
           <Link to='/claim' className="claimant left w-31">
-            Claim Ration
+            Resigter Claimants
           </Link>
           <Link to='/search' className="search left w-31">
-            Find Claimants
+            Search Claimants
           </Link>  
         </div>
       </div>
