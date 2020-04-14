@@ -1,18 +1,24 @@
 .container{
 	position: relative;
 	min-height: 100vh;
+	text-align: center;
 }
 
 .btn-container{
-	position: absolute;
-	top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-	height: 200px;
+	display: inline-block;
+	height: 150px;
 	width: 90%;
-	max-width: 800px;
-	font-size: 2em;
+	max-width: 600px;
+	font-size: 1.5em;
 	font-weight: 800;
+	margin-top: 100px;
+}
+
+.stats-container{
+	width: 70%;
+	height: 350px;
+	text-align: center;
+	display: inline-block;
 }
 
 .Active{
@@ -55,6 +61,40 @@
 	color: #3536ff;
 }
 
+.card-container{
+	width: 33%;
+	height: 100%;
+	position: relative;
+}
+
+.card{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	min-width: 300px;
+	height: 300px;
+	background-color: black;
+	color: white;
+	font-size: 2em;
+	border-radius: 10px;
+	-webkit-box-shadow: -8px 9px 37px -8px rgba(0,0,0,0.75);
+	-moz-box-shadow: -8px 9px 37px -8px rgba(0,0,0,0.75);
+	box-shadow: -8px 9px 37px -8px rgba(0,0,0,0.75);
+}
+
+.stat{
+	font-size: 70px;
+	margin-bottom: 20px;
+	color: #3536ff;
+}
+
+.card:hover{
+	background-color: #212121;
+}
+
+/*Phones*/
 @media screen and (max-width: 700px){
 	.w-31{
 		width: 100%;
@@ -65,22 +105,73 @@
 	}
 
 	.btn-container{
-		width: 200px;
+		width: 90%;
 		font-size: 1em;
 		text-align: center;
-		transform: translate(-50%, -130%);
+		height: 100px;
+		margin-top: 20px;
+		/*transform: translate(-50%, -130%);*/
 	}
 
 	.donor, .claimant, .search{
-		width: 200px;
-		height: 200px;
-		border-radius: 50% !important;
-		border: none;
-		background-color: red;
-		margin-bottom: 10px;
-		background-color: black;
-		color: #3536ff;
+		width: 31%;
+		border-top: 5px solid black;
+		border-bottom: 5px solid black;
+		border-right: 5px solid black;
 	}
 
+	.donor{
+		border-left: 5px solid black;
+	}
+
+	.card{
+		font-size: 17px;
+		height: 150px;
+		min-width: 140px;
+		width: 120px;
+		max-width: 100%;
+	}
+
+	.stat{
+		font-size: 30px;
+	}
+
+	.res-2{
+		width: 50%;
+		height: 50%;
+	}
+
+	.stats-container{
+		width: 90%;
+		height: 370px;
+	}
+
+	.res-nl{
+		width: 100%;
+		height: 50%;
+	}
+
+}
+
+/*Tablets*/
+@media screen and (min-width: 700px) and (max-width: 1024px) {
+	.res-2{
+		width: 50%;
+		height: 50%;
+	}
+
+	.res-nl{
+		width: 100%;
+		height: 50%;
+	}
+
+	.stats-container{
+		height: 660px;
+		min-width: 700px;
+	}
+
+	.btn-container{
+		margin-top: 20px;
+	}
 
 }
