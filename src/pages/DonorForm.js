@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Tabs } from '@material-ui/core';  
 import axios from 'axios'
+import { ReCaptcha } from 'react-recaptcha-google'
 
 import '../App.css'
 import '../styles/Forms.css'
@@ -45,9 +46,13 @@ class DonorForm extends Component {
       list_val : [],
 
       thankyou: false,
+      recaptchaResponse: '',
     }
 
     this.fetchData()
+    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+
   }
 
   
@@ -142,6 +147,7 @@ formSubmit = e =>{
       .catch(err=>{console.log(err)})
       }	
   }
+  else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA'})}  
   else {
     console.log("check2")
     this.setState({error: '', thankyou: true})
@@ -201,6 +207,16 @@ changeval = (val) => {
   this.setState({donation_amount: sum})
 }
 
+  onLoadRecaptcha() {
+        if (this.captchaDemo) {
+          this.captchaDemo.reset();
+            // this.captchaDemo.execute();
+        }
+  }
+
+  verifyCallback(recaptchaToken) {
+      this.setState({recaptchaResponse: recaptchaToken})
+  }
 
 
   render() {
@@ -333,6 +349,15 @@ changeval = (val) => {
           </div>
 
           <div className="spacer-60 phone-only"/>
+          <ReCaptcha className="captcha"
+                ref={(el) => {this.captchaDemo = el;}}
+                render="explicit"
+                sitekey="6Le6cOkUAAAAAMM9CaHm5g4E3Vn4oHQNFO9f05JL"
+                onloadCallback={this.onLoadRecaptcha}
+                verifyCallback={this.verifyCallback}
+                theme="dark"
+                render="explicit"
+            />
           <div>
             <button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Donate</button>
           </div>

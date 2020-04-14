@@ -3,7 +3,7 @@ import axios from 'axios';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReCaptcha } from 'react-recaptcha-google'
-import * as request from 'request';
+// import * as request from 'request';
 
 import '../App.css'
 import '../styles/Forms.css'
@@ -101,7 +101,6 @@ class ClaimantForm extends Component {
 		else if (!this.state.email.match(mailformat)){this.setState({error: 'Enter a Valid Email Address'}); return;}
 		else if (this.state.who===''){this.setState({error: 'Identify who you represent'}); return;}
 		else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA'})}
-
 		else {
 			let formData = new FormData();
 			formData.append('name', this.state.name)
@@ -164,7 +163,7 @@ class ClaimantForm extends Component {
 					</div>
 	        	</div>	        	
 
-	        	<ReCaptcha
+	        	<ReCaptcha className="captcha"
 		            ref={(el) => {this.captchaDemo = el;}}
 		            render="explicit"
 		            sitekey="6Le6cOkUAAAAAMM9CaHm5g4E3Vn4oHQNFO9f05JL"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 import '../App.css'
 import '../styles/Home.css'
@@ -13,6 +14,17 @@ class Home extends Component {
       claimants: '200',
     };
   } 
+
+  componentDidMount(){
+    axios({
+      method: 'get',
+      url: 'http://203.101.178.74:7620/public-api/stats.php',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .then(res=>{
+      // Set state here
+    })
+  }
 
   render() {
     return (

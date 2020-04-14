@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { ReCaptcha } from 'react-recaptcha-google'
 
 import '../App.css'
 import '../styles/Forms.css'
-
 
 
 class Search extends Component {
@@ -16,7 +15,12 @@ class Search extends Component {
       cnic: '',
       result: {},
       error: '',
+      recaptchaResponse: '',
     };
+
+    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+
   }
 
   changeCNIC = e =>{
@@ -28,6 +32,7 @@ class Search extends Component {
   		this.setState({error: 'Enter a CNIC Number', result: {}}); 
   		return;
   	}
+    else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA', result: {}})}
   	else{
   		
   		this.setState({error: ''})
@@ -52,6 +57,17 @@ class Search extends Component {
   	}
   }
 
+  onLoadRecaptcha() {
+        if (this.captchaDemo) {
+          this.captchaDemo.reset();
+            // this.captchaDemo.execute();
+        }
+  }
+
+  verifyCallback(recaptchaToken) {
+      this.setState({recaptchaResponse: recaptchaToken})
+  }
+
   render() {
 
     return (
@@ -63,9 +79,18 @@ class Search extends Component {
 		        <span className="label">CNIC / Phone Number</span><br/>
         		<input type="string" value={this.state.cnic} placeholder="Enter Claimant's CNIC or Phone Number" onChange = {e=>{this.changeCNIC(e)}}/>
         	</div>
+          <ReCaptcha className="captcha"
+                ref={(el) => {this.captchaDemo = el;}}
+                render="explicit"
+                sitekey="6Le6cOkUAAAAAMM9CaHm5g4E3Vn4oHQNFO9f05JL"
+                onloadCallback={this.onLoadRecaptcha}
+                verifyCallback={this.verifyCallback}
+                theme="dark"
+                render="explicit"
+            />
         	<div>
         		<button type="submit" form="form" className="form-btn" onClick={e=>{this.search(e)}}>Search</button>
-	    	</div>
+	    	  </div>
         </div>
         
         <br/><br/>
