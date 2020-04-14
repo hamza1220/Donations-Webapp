@@ -47,7 +47,6 @@ class ClaimantForm extends Component {
 	}
 
 	verifyCallback(recaptchaToken) {
-		console.log("Token: ", recaptchaToken)
 	    this.setState({recaptchaResponse: recaptchaToken})
 
 	 //    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
