@@ -49,21 +49,28 @@ class ClaimantForm extends Component {
 	verifyCallback(recaptchaToken) {
 		console.log("Token: ", recaptchaToken)
 	    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
-	    request(verificationUrl
-	        , function(error, response, body) {
-	          if (error) {
-	            console.log("err 1", error)
-	            return;
-	          }
-	          if (response.statusCode !== 200) {
-	            console.log("err 2")
-	          	return;
-	          }
+		fetch({
+			method: 'get',
+			url: verificationUrl,
+			mode: "no-cors",
+			headers: {'Content-Type': 'multipart/form-data'}
+		})
+		.then(res => console.log(res))
+		// request(verificationUrl
+	    //     , function(error, response, body) {
+	    //       if (error) {
+	    //         console.log("err 1", error)
+	    //         return;
+	    //       }
+	    //       if (response.statusCode !== 200) {
+	    //         console.log("err 2")
+	    //       	return;
+	    //       }
 
-	          body = JSON.parse(body);
-	          const passCaptcha = !(body.success !== undefined && !body.success);
-	          console.log(passCaptcha)
-	        });
+	    //       body = JSON.parse(body);
+	    //       const passCaptcha = !(body.success !== undefined && !body.success);
+	    //       console.log(passCaptcha)
+	    //     });
 		}
 
   	selectEmail = e =>{
