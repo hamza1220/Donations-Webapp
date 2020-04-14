@@ -48,14 +48,19 @@ class ClaimantForm extends Component {
 
 	verifyCallback(recaptchaToken) {
 		console.log("Token: ", recaptchaToken)
-	    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
-		fetch({
-			method: 'get',
-			url: verificationUrl,
-			mode: "no-cors",
-			headers: {'Content-Type': 'multipart/form-data'}
-		})
-		.then(res => console.log(res))
+	    this.setState({recaptchaResponse: recaptchaToken})
+
+	 //    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
+		// fetch({
+		// 	method: 'post',
+		// 	url: verificationUrl,
+		// 	mode: "no-cors",
+		// 	headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+
+		// })
+		// .then(res => console.log(res))
+
+
 		// request(verificationUrl
 	    //     , function(error, response, body) {
 	    //       if (error) {
@@ -96,6 +101,7 @@ class ClaimantForm extends Component {
 		else if (this.state.cellnum===''){this.setState({error: 'Enter a Valid Cell Number'}); return;}
 		else if (!this.state.email.match(mailformat)){this.setState({error: 'Enter a Valid Email Address'}); return;}
 		else if (this.state.who===''){this.setState({error: 'Identify who you represent'}); return;}
+		else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA'})}
 
 		else {
 			let formData = new FormData();
