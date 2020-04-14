@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ReCaptcha } from 'react-recaptcha-google'
+import * as request from 'request';
 
 import '../App.css'
 import '../styles/Forms.css'
@@ -18,9 +20,51 @@ class ClaimantForm extends Component {
       
       error: '',
       thankyou: false,
+      recaptchaResponse: '',
     };
 
+    this.onLoadRecaptcha = this.onLoadRecaptcha.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+
   }	
+
+  	componentDidMount() {
+	    if (this.captchaDemo) {
+	        console.log("started, just a second...")
+	        this.captchaDemo.reset();
+	        // this.captchaDemo.execute();
+    	}
+    	else{
+    		console.log('nope')
+    	}
+  	}
+
+  	onLoadRecaptcha() {
+      	if (this.captchaDemo) {
+        	this.captchaDemo.reset();
+          	// this.captchaDemo.execute();
+      	}
+	}
+
+	verifyCallback(recaptchaToken) {
+		console.log("Token: ", recaptchaToken)
+	    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
+	    request(verificationUrl
+	        , function(error, response, body) {
+	          if (error) {
+	            console.log("err 1", error)
+	            return;
+	          }
+	          if (response.statusCode !== 200) {
+	            console.log("err 2")
+	          	return;
+	          }
+
+	          body = JSON.parse(body);
+	          const passCaptcha = !(body.success !== undefined && !body.success);
+	          console.log(passCaptcha)
+	        });
+		}
 
   	selectEmail = e =>{
     	this.setState({email: e.target.value})
@@ -108,6 +152,15 @@ class ClaimantForm extends Component {
 					</div>
 	        	</div>	        	
 
+	        	<ReCaptcha
+		            ref={(el) => {this.captchaDemo = el;}}
+		            render="explicit"
+		            sitekey="6Le6cOkUAAAAAMM9CaHm5g4E3Vn4oHQNFO9f05JL"
+		            onloadCallback={this.onLoadRecaptcha}
+		            verifyCallback={this.verifyCallback}
+		            theme="dark"
+		            render="explicit"
+		        />
 	        	<div>
 	        		<button type="submit" form="form" className="form-btn" onClick={e=>{this.formSubmit(e)}}>Request Permission</button>
 	        	</div>

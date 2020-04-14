@@ -5,9 +5,14 @@ import Home from './pages/Home';
 import DonorForm from './pages/DonorForm'
 import ClaimantForm from './pages/ClaimantForm'
 import Search from './pages/Search'
+import { loadReCaptcha } from 'react-recaptcha-google'
 
 
 class App extends Component {
+  componentDidMount() {
+      loadReCaptcha();
+  }
+
   render() {
     const App = () => (
       <div>
