@@ -9,9 +9,9 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      donated: '50,000',
-      packages: '250',
-      claimants: '200',
+      donated: 0,
+      packages: 0,
+      claimants: 0,
     };
   } 
 
@@ -22,6 +22,9 @@ class Home extends Component {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
     .then(res=>{
+      // console.log("get")
+      // console.log(res.data)
+      this.setState({donated:res.data.amount, packages:res.data.count_package,claimants:res.data.count_remaining_people})
       // Set state here
     })
   }
@@ -48,7 +51,7 @@ class Home extends Component {
           <div className="card-container left res-nl">
             <div className="card w-31">
               <p className="stat">{this.state.claimants}</p>
-              People Fed
+              People Remaining to be Fed
             </div>
           </div>
 
