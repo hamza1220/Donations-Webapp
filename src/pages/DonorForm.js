@@ -164,17 +164,17 @@ formSubmit = e =>{
     formData.append('email', this.state.email)
     formData.append('image', this.state.payment_img)
   
-    // axios({
-    //     method: 'post',
-    //     url: 'http://203.101.178.74:7620/public-api/donation.php',
-    //     data: formData,
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    // })
-    // .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
+    axios({
+        method: 'post',
+        url: 'http://203.101.178.74:7620/public-api/donation.php',
+        data: formData,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
       this.setState({thankyou: true})
      
-    // }})
-    // .catch(err=>{console.log(err)})
+    }})
+    .catch(err=>{console.log(err)})
   }
 
 

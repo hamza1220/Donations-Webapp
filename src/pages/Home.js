@@ -51,7 +51,7 @@ class Home extends Component {
           <div className="card-container left res-nl">
             <div className="card w-31">
               <p className="stat">{this.state.claimants}</p>
-              People Remaining to be Fed
+              People waiting to be Fed
             </div>
           </div>
 
