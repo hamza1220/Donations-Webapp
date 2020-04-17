@@ -150,10 +150,10 @@ formSubmit = e =>{
   else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA'})}  
   else {
     console.log("check2")
-    this.setState({error: '', thankyou: true})
-    console.log("error", this.state.error)
+    // this.setState({error: '', thankyou: true})
+    // console.log("error", this.state.error)
 
-    console.log("submitting")
+    // console.log("submitting")
     let formData = new FormData();
     formData.append('cnic', this.state.cnic)
     formData.append('name', this.state.name)
@@ -164,16 +164,16 @@ formSubmit = e =>{
     formData.append('email', this.state.email)
     formData.append('image', this.state.payment_img)
   
-    // axios({
-    //     method: 'post',
-    //     url: 'http://203.101.178.74:7620/public-api/donation.php',
-    //     data: formData,
-    //     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-    // })
-    // .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
+    axios({
+        method: 'post',
+        url: 'http://203.101.178.74:7620/public-api/donation.php',
+        data: formData,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    })
+    .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
       this.setState({thankyou: true})
      
-    // }})
+    }})
     // .catch(err=>{console.log(err)})
   }
 
@@ -188,6 +188,7 @@ fetchData = () => {
   })
   .then(res=>{
     var vals = []
+    console.log(res)
     res.data.map(val=>vals.push(0))
     this.setState({packages: res.data, list_val: vals})
   })
@@ -290,6 +291,7 @@ changeval = (val) => {
                 <div className="single-input contents"> <p >Total Price: &emsp; Rs.{val.cost}</p> </div>
                 <div className="single-input contents"> Package Contents: </div>
                 <ul>
+                  {/* {if val.items ? val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.quantity} {item.unit_name} {item.name}</li></div>): <div></div>} */}
                   {val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.quantity} {item.unit_name} {item.name}</li></div>)}
                 </ul>
                 <div className="spacer-20"/>
