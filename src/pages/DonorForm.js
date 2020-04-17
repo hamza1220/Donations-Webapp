@@ -174,7 +174,7 @@ formSubmit = e =>{
       this.setState({thankyou: true})
      
     }})
-    // .catch(err=>{console.log(err)})
+    .catch(err=>{console.log(err)})
   }
 
 
