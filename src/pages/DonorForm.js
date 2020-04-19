@@ -136,6 +136,7 @@ formSubmit = e =>{
       formData.append('amount', this.state.donation_amount)
       formData.append('email', this.state.email)
       formData.append('image', this.state.payment_img)
+      formData.append('g-recaptcha-response', this.state.recaptchaResponse);
     
       axios({
           method: 'post',

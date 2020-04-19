@@ -39,8 +39,7 @@ class Search extends Component {
         axios.get('https://rms.adeelchaudry.pk/public-api/claimant.php', {
 		    params: {
           cnic: this.state.cnic,
-          "g-recaptcha-response" :this.state.recaptchaResponse
-          
+          'g-recaptcha-response': this.state.recaptchaResponse
 		    }
 		})
 		.then(res=>{
