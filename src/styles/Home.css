@@ -1,10 +1,10 @@
-.container{
+#root .container{
 	position: relative;
 	min-height: 100vh;
 	text-align: center;
 }
 
-.btn-container{
+#root .btn-container{
 	display: inline-block;
 	height: 150px;
 	width: 90%;
@@ -14,22 +14,22 @@
 	margin-top: 100px;
 }
 
-.stats-container{
+#root .stats-container{
 	width: 70%;
 	height: 350px;
 	text-align: center;
 	display: inline-block;
 }
 
-.Active{
+#root .Active{
 	display: block;
 }
 
-.InActive{
+#root .InActive{
 	display: none;
 }
 
-.donor, .claimant, .search{
+#root .donor, #root .claimant, #root .search{
 	display: flex;
 	justify-content: center;
 	align-content: center;
@@ -42,32 +42,32 @@
 	color: #333;
 }
 
-.donor, .claimant{
+#root .donor, .claimant{
 	border-right: 10px solid black;
 }
 
-.donor{
+#root .donor{
 	border-left: 10px solid black;
 	border-radius: 50% 0 0 50%;	
 }
 
-.search{
+#root .search{
 	border-right: 10px solid black;
 	border-radius: 0 50% 50% 0	
 }
 
-.donor:hover, .claimant:hover, .search:hover{
+#root .donor:hover, #root .claimant:hover, #root .search:hover{
 	background-color: black;
 	color: #3536ff;
 }
 
-.card-container{
+#root .card-container{
 	width: 33%;
 	height: 100%;
 	position: relative;
 }
 
-.card{
+#root .card{
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -84,27 +84,27 @@
 	box-shadow: -8px 9px 37px -8px rgba(0,0,0,0.75);
 }
 
-.stat{
+#root .stat{
 	font-size: 70px;
 	margin-bottom: 20px;
 	color: #3536ff;
 }
 
-.card:hover{
+#root .card:hover{
 	background-color: #212121;
 }
 
 /*Phones*/
 @media screen and (max-width: 700px){
-	.w-31{
+	#root .w-31{
 		width: 100%;
 	}
 
-	.w-66{
+	#root .w-66{
 		width: 100%;
 	}
 
-	.btn-container{
+	#root .btn-container{
 		width: 90%;
 		font-size: 1em;
 		text-align: center;
@@ -113,18 +113,18 @@
 		/*transform: translate(-50%, -130%);*/
 	}
 
-	.donor, .claimant, .search{
+	#root .donor, #root .claimant, #root .search{
 		width: 31%;
 		border-top: 5px solid black;
 		border-bottom: 5px solid black;
 		border-right: 5px solid black;
 	}
 
-	.donor{
+	#root .donor{
 		border-left: 5px solid black;
 	}
 
-	.card{
+	#root .card{
 		font-size: 17px;
 		height: 150px;
 		min-width: 140px;
@@ -132,21 +132,21 @@
 		max-width: 100%;
 	}
 
-	.stat{
+	#root .stat{
 		font-size: 30px;
 	}
 
-	.res-2{
+	#root .res-2{
 		width: 50%;
 		height: 50%;
 	}
 
-	.stats-container{
+	#root .stats-container{
 		width: 90%;
 		height: 370px;
 	}
 
-	.res-nl{
+	#root .res-nl{
 		width: 100%;
 		height: 50%;
 	}
@@ -155,22 +155,22 @@
 
 /*Tablets*/
 @media screen and (min-width: 700px) and (max-width: 1024px) {
-	.res-2{
+	#root .res-2{
 		width: 50%;
 		height: 50%;
 	}
 
-	.res-nl{
+	#root .res-nl{
 		width: 100%;
 		height: 50%;
 	}
 
-	.stats-container{
+	#root .stats-container{
 		height: 660px;
 		min-width: 700px;
 	}
 
-	.btn-container{
+	#root .btn-container{
 		margin-top: 20px;
 	}
 

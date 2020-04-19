@@ -59,13 +59,13 @@ class Home extends Component {
 
 
         <div className="btn-container">
-          <Link to='/donate' className="donor left w-31">
+          <Link to='/ration-drive/donate' className="donor left w-31">
             Make a Donation
           </Link>
-          <Link to='/claim' className="claimant left w-31">
-            Resigter Claimants
+          <Link to='/ration-drive/claim' className="claimant left w-31">
+            Register Claimants
           </Link>
-          <Link to='/search' className="search left w-31">
+          <Link to='/ration-drive/search' className="search left w-31">
             Search Claimants
           </Link>  
         </div>

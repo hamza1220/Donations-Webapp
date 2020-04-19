@@ -17,10 +17,10 @@ class App extends Component {
     const App = () => (
       <div>
         <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/donate' component={DonorForm}/>
-          <Route path='/claim'  component={ClaimantForm}/>
-          <Route path='/search' component={Search}/>
+          <Route exact path='/ration-drive/' component={Home}/>
+          <Route path='/ration-drive/donate' component={DonorForm}/>
+          <Route path='/ration-drive/claim'  component={ClaimantForm}/>
+          <Route path='/ration-drive/search' component={Search}/>
         </Switch>
       </div>
     )
