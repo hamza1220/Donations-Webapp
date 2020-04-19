@@ -107,6 +107,7 @@ class ClaimantForm extends Component {
 			formData.append('phone', this.state.cellnum)
 			formData.append('email', this.state.email)
 			formData.append('affiliation', this.state.who)
+			formData.append('g-recaptcha-response', this.state.recaptchaResponse);
 			
 			axios({
                     method: 'post',

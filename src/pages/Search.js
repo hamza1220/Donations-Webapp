@@ -38,7 +38,8 @@ class Search extends Component {
   		this.setState({error: ''})
         axios.get('http://203.101.178.74:7620/public-api/claimant.php', {
 		    params: {
-		      cnic: this.state.cnic
+          cnic: this.state.cnic,
+          'g-recaptcha-response': this.state.recaptchaResponse
 		    }
 		})
 		.then(res=>{
