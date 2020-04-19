@@ -3,22 +3,22 @@ body{
   color: #333;
 }
 
-.App {
+#root .App {
   text-align: center;
 }
 
-.App-logo {
+#root .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  #root .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
+#root .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -29,7 +29,7 @@ body{
   color: white;
 }
 
-.App-link {
+#root .App-link {
   color: #61dafb;
 }
 
@@ -42,17 +42,17 @@ body{
   }
 }
 
-::-moz-selection { /* Code for Firefox */
+#root ::-moz-selection { /* Code for Firefox */
   color: white;
   background: #333;
 }
 
-::selection {
+#root ::selection {
   color: white;
   background: #333;
 }
 
-input, select, textarea{
+#root input, select, textarea{
   padding-top: 20px !important;
   padding-bottom: 20px !important;
   padding-left: 27px !important;
@@ -61,28 +61,28 @@ input, select, textarea{
   font-size: 16px;
 }
 
-input:focus, select:focus, textarea:focus{
+#root input:focus, select:focus, textarea:focus{
   /*outline-color: #333;*/
   outline-color: #3536ff;
 }
 
-select{
+#root select{
   width: 100%;
 }
 
-textarea{
+#root textarea{
   font-family: Arial;
 }
 
-.left{
+#root .left{
   float: left;
 }
 
-.right{
+#root .right{
   float: right;
 }
 
-.form{
+#root .form{
   width: 80%;
   /*max-width: 1100px;*/
   background-color: #000;
@@ -97,46 +97,46 @@ textarea{
 
 }
 
-.spacer-20{
+#root .spacer-20{
   margin-bottom: 20px;
 }
 
-.spacer-60{
+#root .spacer-60{
   margin-bottom: 60px;
 }
 
-.label{
+#root .label{
   display: inline-block;
   margin-bottom: 5px;
 }
 
-.w-31{
+#root .w-31{
   width: 31%;
 }
 
-.w-66{
+#root .w-66{
   width: 66%;
 }
 
-.hide{
+#root .hide{
   display: none;
 }
 
-.relative{
+#root .relative{
   position: relative;
 }
 
-.full-page{
+#root .full-page{
   width: 100vw;
   height: 100vh;
 
 }
 
-.phone-spacer{
+#root .phone-spacer{
   margin-bottom: 15px;
 }
 
-h2{
+#root h2{
   background-color: #000;
   width: 70%;
   max-width: 700px;
@@ -150,17 +150,17 @@ h2{
 }
 
 @media screen and (max-width: 700px){
-  h2{
+  #root h2{
     font-size: 18px;
   }
 }
 
 @media screen and (min-width: 700px){
-  .phone-spacer{
+  #root .phone-spacer{
     margin-bottom: 0px;
   }
 
-  .phone-only{
+  #root .phone-only{
     display: none;
   }
 }
