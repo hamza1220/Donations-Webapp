@@ -18,7 +18,7 @@ class Home extends Component {
   componentDidMount(){
     axios({
       method: 'get',
-      url: 'http://203.101.178.74:7620/public-api/stats.php',
+      url: 'https://rms.adeelchaudry.pk/public-api/stats.php',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
     .then(res=>{

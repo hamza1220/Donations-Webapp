@@ -163,10 +163,11 @@ formSubmit = e =>{
     formData.append('amount', this.state.donation_amount)
     formData.append('email', this.state.email)
     formData.append('image', this.state.payment_img)
+    formData.append('g-recaptcha-response', this.state.recaptchaResponse)
   
     axios({
         method: 'post',
-        url: 'http://203.101.178.74:7620/public-api/donation.php',
+        url: 'https://rms.adeelchaudry.pk/public-api/donation.php',
         data: formData,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
@@ -183,7 +184,7 @@ formSubmit = e =>{
 fetchData = () => {
   axios({
     method: 'get',
-    url: 'http://203.101.178.74:7620/public-api/package.php',
+    url: 'https://rms.adeelchaudry.pk/public-api/package.php',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
   })
   .then(res=>{
@@ -289,11 +290,7 @@ changeval = (val) => {
                 </ExpansionPanelSummary>
                              
                 <div className="single-input contents"> <p >Total Price: &emsp; Rs.{val.cost}</p> </div>
-                <div className="single-input contents"> Package Contents: </div>
-                <ul>
-                  {/* {if val.items ? val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.quantity} {item.unit_name} {item.name}</li></div>): <div></div>} */}
-                  {val.items.map((item,j)=><div key = {j} style={{width:"100%", textAlign:"left"}}><li>{item.quantity} {item.unit_name} {item.name}</li></div>)}
-                </ul>
+                
                 <div className="spacer-20"/>
                 <div className="single-input contents">
                   Enter Number of Packages to Donate? <input min="0" id={i} type="number" className="package-counter" onChange={this.changeval}/>
@@ -307,7 +304,7 @@ changeval = (val) => {
           <br/>
 
           <div className="line">
-            <div className="left double-input">
+            <div className="double-input">
               <span className="label">Donation Amount &emsp;*required</span><br/>
               {
                 this.state.packg ? <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount} disabled onChange={e=>{this.selectDonateAmount(e)}}/> :
@@ -315,17 +312,17 @@ changeval = (val) => {
               }
             </div>
 
-            <div className="right double-input">
+            {/* <div className="right double-input">
               <span className="label">Mode of payment &emsp;*required</span><br/>
               <select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
               <option className="hide" value="" disabled defaultValue>Select Area</option>
               <option value="C">Cash</option>
               <option value="O">Online Transfer</option>
               </select>
-            </div>  
+            </div>   */}
           </div>
 
-          <div className="line">
+          {/* <div className="line">
               <div className = {this.state.mode_payment ? "InActive": "Active"}>
                 Please transfer your amount in this Bank account and attach the proof of payment below <br/>         
                 <div style={{textAlign: 'center'}}>
@@ -339,7 +336,7 @@ changeval = (val) => {
                 <br/>
                 Contact Information: +92-3xx-xxxxxxx          
               </div>
-          </div>          
+          </div>           */}
 
           <div className = {this.state.mode_payment ? "InActive": "single-input"}>
             <span className="label">Upload proof of payment</span><br/>

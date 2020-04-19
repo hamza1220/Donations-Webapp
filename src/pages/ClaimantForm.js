@@ -107,10 +107,12 @@ class ClaimantForm extends Component {
 			formData.append('phone', this.state.cellnum)
 			formData.append('email', this.state.email)
 			formData.append('affiliation', this.state.who)
+			formData.append('g-recaptcha-response', this.state.recaptchaResponse)
+			
 			
 			axios({
                     method: 'post',
-                    url: 'http://203.101.178.74:7620/public-api/request.php',
+                    url: 'http://rms.adeelchaudry.pk/public-api/request.php',
                     // url: 'http://localhost:8000/public-api/request.php',
                     data: formData,
                     headers: {'Content-Type': 'multipart/form-data'}
