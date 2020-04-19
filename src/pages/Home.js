@@ -63,7 +63,7 @@ class Home extends Component {
             Make a Donation
           </Link>
           <Link to='/claim' className="claimant left w-31">
-            Resigter Claimants
+            Register Claimants
           </Link>
           <Link to='/search' className="search left w-31">
             Search Claimants
