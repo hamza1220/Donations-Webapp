@@ -265,11 +265,11 @@ changeval = (val) => {
                   <span className="label">How did you hear about us?</span><br/>
                   <select id="reference" value={this.state.reference} onChange={e=>{this.selectOption(e)}}>
                 {/* <option className="hide" value="" disabled></option> */}
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-                <option value="5">Option 5</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Friend and family member">Friend and family member</option>
+                <option value="Advertisement">Advertisment</option>
+                <option value="Other">Other</option>
+                {/* <option value="5">Option 5</option> */}
               </select>
             </div>
 
