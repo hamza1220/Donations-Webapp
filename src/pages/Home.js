@@ -22,10 +22,7 @@ class Home extends Component {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
     .then(res=>{
-      // console.log("get")
-      // console.log(res.data)
       this.setState({donated:res.data.amount, packages:res.data.count_package,claimants:res.data.count_remaining_people})
-      // Set state here
     })
   }
 

@@ -57,7 +57,7 @@ body{
   padding-bottom: 20px !important;
   padding-left: 27px !important;
   padding-right: 27px !important;
-  width: calc(100% - 54px);
+  width: calc(100%);
   font-size: 16px;
 }
 
@@ -147,6 +147,7 @@ body{
   font-size: 38px;
   color: white;
   letter-spacing: 1.4px;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 700px){
