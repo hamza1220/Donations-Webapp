@@ -24,9 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-  // const classes = useStyles();
-
-
 class DonorForm extends Component {
   constructor(props){
     super(props)
@@ -72,14 +69,6 @@ class DonorForm extends Component {
     this.setState({email: e.target.value})
   }
 
-  // selectFamSize = e =>{
-  //   this.setState({fam_size: e.target.value})
-  // }
-
-  // selectAddress = e =>{
-  //   this.setState({address: e.target.value})
-  // }
-
   selectDonateAmount = e =>{
     this.setState({donation_amount: e.target.value})
   }
@@ -96,8 +85,7 @@ class DonorForm extends Component {
       this.setState({individual: 1})
     }else if (e.target.value === "Company"){
       this.setState({individual: 0})
-    }
-  
+    } 
 
   }
 
@@ -118,8 +106,7 @@ class DonorForm extends Component {
 formSubmit = e =>{
   e.preventDefault();
   console.log(this.state)
-  if (this.state.cnic===''){this.setState({error: 'Enter a Valid CNIC Number'})}
-  else if (this.state.cellnum===''){this.setState({error: 'Enter a Valid Cell Number'})}
+  if (this.state.cellnum===''){this.setState({error: 'Enter a Valid Cell Number'})}
   else if (this.state.donation_amount===0){this.setState({error: 'Enter a Valid Donation amount'})}
   else if (this.state.mode_payment === false){
     if (this.state.payment_img===''){this.setState({error: 'Upload proof of payment'})}	
@@ -150,11 +137,7 @@ formSubmit = e =>{
   }
   else if (this.state.recaptchaResponse===""){this.setState({error: 'Complete the ReCAPTCHA'})}  
   else {
-    console.log("check2")
-    // this.setState({error: '', thankyou: true})
-    // console.log("error", this.state.error)
-
-    // console.log("submitting")
+    
     let formData = new FormData();
     formData.append('cnic', this.state.cnic)
     formData.append('name', this.state.name)
@@ -172,10 +155,12 @@ formSubmit = e =>{
         data: formData,
         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     })
-    .then(res=>{console.log(JSON.stringify(res)); if(res.data.message === "Donation recorded!"){
-      this.setState({thankyou: true})
-     
-    }})
+    .then(res=>{
+    	console.log(JSON.stringify(res.data.message)); 
+    	if(res.data.message === "Donation recorded!"){
+      		this.setState({thankyou: true})
+    	}
+	})
     .catch(err=>{console.log(err)})
   }
 
@@ -212,8 +197,7 @@ changeval = (val) => {
 
   onLoadRecaptcha() {
         if (this.captchaDemo) {
-          this.captchaDemo.reset();
-            // this.captchaDemo.execute();
+			this.captchaDemo.reset();
         }
   }
 
@@ -235,7 +219,7 @@ changeval = (val) => {
           <div className="line">
             <div className="left double-input">
                   <span className="label">CNIC &emsp;*required</span><br/>
-                  <input required type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
+                  <input type="string" placeholder="Enter CNIC" value={this.state.cnic} onChange={e=>{this.selectCnic(e)}}/>
             </div>
 
             <div className="right double-input">
@@ -269,7 +253,6 @@ changeval = (val) => {
                 <option value="Friend and family member">Friend and family member</option>
                 <option value="Advertisement">Advertisment</option>
                 <option value="Other">Other</option>
-                {/* <option value="5">Option 5</option> */}
               </select>
             </div>
 
@@ -312,32 +295,7 @@ changeval = (val) => {
                 <input required type="number" min="0" placeholder="Enter Amount in Rs." value={this.state.donation_amount}  onChange={e=>{this.selectDonateAmount(e)}}/>
               }
             </div>
-
-            {/* <div className="right double-input">
-              <span className="label">Mode of payment &emsp;*required</span><br/>
-              <select required id="area" value={this.state.area} onChange={e=>{this.selectOption(e)}}>
-              <option className="hide" value="" disabled defaultValue>Select Area</option>
-              <option value="C">Cash</option>
-              <option value="O">Online Transfer</option>
-              </select>
-            </div>   */}
           </div>
-
-          {/* <div className="line">
-              <div className = {this.state.mode_payment ? "InActive": "Active"}>
-                Please transfer your amount in this Bank account and attach the proof of payment below <br/>         
-                <div style={{textAlign: 'center'}}>
-                  Account Title: xxxxxx xxxxx xxxx <br/>
-                  Bank Code: xxxx xxxx xx<br/>
-                  IBAN: xxxxxxxx-xxxxxx-xxxx-xx<br/>
-                </div>
-              </div>
-              <div className = {this.state.mode_payment ? "Active": "InActive"}>
-                Address: Block 1, Plot C1, Gulberg 3, Lahore
-                <br/>
-                Contact Information: +92-3xx-xxxxxxx          
-              </div>
-          </div>           */}
 
           <div className = {this.state.mode_payment ? "InActive": "single-input"}>
             <span className="label">Upload proof of payment</span><br/>

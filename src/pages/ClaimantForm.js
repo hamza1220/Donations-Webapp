@@ -48,34 +48,7 @@ class ClaimantForm extends Component {
 
 	verifyCallback(recaptchaToken) {
 	    this.setState({recaptchaResponse: recaptchaToken})
-
-	 //    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify?secret=' + "6Le6cOkUAAAAAP60LoCwc9nrAH-whyQDoBMQFFb6" + '&response=' + recaptchaToken;
-		// fetch({
-		// 	method: 'post',
-		// 	url: verificationUrl,
-		// 	mode: "no-cors",
-		// 	headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-
-		// })
-		// .then(res => console.log(res))
-
-
-		// request(verificationUrl
-	    //     , function(error, response, body) {
-	    //       if (error) {
-	    //         console.log("err 1", error)
-	    //         return;
-	    //       }
-	    //       if (response.statusCode !== 200) {
-	    //         console.log("err 2")
-	    //       	return;
-	    //       }
-
-	    //       body = JSON.parse(body);
-	    //       const passCaptcha = !(body.success !== undefined && !body.success);
-	    //       console.log(passCaptcha)
-	    //     });
-		}
+	}
 
   	selectEmail = e =>{
     	this.setState({email: e.target.value})
