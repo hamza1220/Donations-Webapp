@@ -262,7 +262,7 @@ changeval = (val) => {
             </div>
           </div>
 
-          <div style={{textAlign:"center", display:"block-inline", marginBottom: '10px'}}>
+          {/* <div style={{textAlign:"center", display:"block-inline", marginBottom: '10px'}}>
               <input className="checkbox" type="checkbox" onChange={this.checkbox}/> <b style={{fontSize: '18px'}}>Please select if you want to donate according to pre-assembled packages</b>
           </div>
           <div style={{display: this.state.packg ?"block" :"none"}}>
@@ -282,7 +282,7 @@ changeval = (val) => {
               </ExpansionPanel>
             )
           }
-          </div>
+          </div> */}
           <br/>
           <br/>
           <br/>
